@@ -8,6 +8,6 @@ public record BerlinClock(
         String singleMinutes
 ) {
     public String asString() {
-        return seconds + fiveHours + singleHours + singleMinutes;
+        return seconds + fiveHours + singleHours + fiveMinutes+ singleMinutes;
     }
 }
