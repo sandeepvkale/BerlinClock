@@ -54,4 +54,9 @@ public class BerlinClockService {
         }
         return row.toString();
     }
+
+    public String toDigitalTime(String berlinTime) {
+        // Implementation for converting Berlin time to digital time
+        return null;
+    }
 }

@@ -132,4 +132,21 @@ class BerlinclockApplicationTests {
         );
     }
 
+    @Test void shouldConvertBerlinClockBackToDigitalTime() {
+        assertAll(
+                () -> assertEquals(
+                        "00:00:00",
+                        service.toDigitalTime( "YOOOOOOOOOOOOOOOOOOOOOOO" ) ),
+                () -> assertEquals(
+                        "23:59:01",
+                        service.toDigitalTime( "ORRRRRRROYYRYYRYYRYYYYYY" ) ),
+                () -> assertEquals(
+                        "16:50:06",
+                        service.toDigitalTime( "YRRROROOOYYRYYRYYRYOOOOO" ) ),
+                () -> assertEquals(
+                        "11:37:01",
+                        service.toDigitalTime( "ORROOROOOYYRYYRYOOOOYYOO" )
+                )
+        );
+    }
 }
