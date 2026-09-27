@@ -18,9 +18,9 @@ public class BerlinClockService {
         LocalTime time = parse(digitalTime);
 
         return new BerlinClock(
-                secondsRow(time),
-                "",
-                "",
+                secondsRow(time),   // Single Row
+                fourLampsRow(time.getHour() / 5, 4, 'R'), // fiveHours
+                fourLampsRow(time.getHour() % 5, 4, 'R'), // SingleHours
                 "",
                 fourLampsRow(time.getMinute() % 5, 4, 'Y') //singleMinutes
         );
