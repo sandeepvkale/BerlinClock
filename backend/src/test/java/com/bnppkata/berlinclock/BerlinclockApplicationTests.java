@@ -5,8 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BerlinclockApplicationTests {
@@ -90,6 +89,46 @@ class BerlinclockApplicationTests {
                 () -> assertEquals(
                         "O",
                         service.toBerlinClock("23:59:59").seconds())
+        );
+    }
+
+    @Test
+    void shouldConvertFiveMinutesRow() {
+        assertAll(
+                () -> assertEquals(
+                        "OOOOOOOOOOO",
+                        service.toBerlinClock("00:00:00").fiveMinutes()),
+                () -> assertEquals(
+                        "YYRYYRYYRYY",
+                        service.toBerlinClock("23:59:59").fiveMinutes()),
+                () -> assertEquals(
+                        "OOOOOOOOOOO",
+                        service.toBerlinClock("12:04:00").fiveMinutes()),
+                () -> assertEquals(
+                        "YYRYOOOOOOO",
+                        service.toBerlinClock("12:23:00").fiveMinutes()),
+                () -> assertEquals(
+                        "YYRYYRYOOOO",
+                        service.toBerlinClock("12:35:00").fiveMinutes())
+        );
+    }
+
+    @Test
+    void shouldConvertWholeClock() {
+        assertAll(
+                () -> assertEquals(
+                        "YOOOOOOOOOOOOOOOOOOOOOOO",
+                        service.toBerlinClock("00:00:00").asString()),
+                () -> assertEquals(
+                        "ORRRRRRROYYRYYRYYRYYYYYY",
+                        service.toBerlinClock("23:59:59").asString()),
+                () -> assertEquals(
+                        "YRRROROOOYYRYYRYYRYOOOOO",
+                        service.toBerlinClock("16:50:06").asString()),
+                () -> assertEquals(
+                        "ORROOROOOYYRYYRYOOOOYYOO",
+                        service.toBerlinClock("11:37:01").asString()
+                )
         );
     }
 

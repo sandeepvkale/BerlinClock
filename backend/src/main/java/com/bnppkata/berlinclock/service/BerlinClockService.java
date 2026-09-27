@@ -21,7 +21,7 @@ public class BerlinClockService {
                 secondsRow(time),   // Single Row
                 fourLampsRow(time.getHour() / 5, 4, 'R'), // fiveHours
                 fourLampsRow(time.getHour() % 5, 4, 'R'), // SingleHours
-                "",
+                fiveMinutes(time.getMinute()), // FiveMinutes
                 fourLampsRow(time.getMinute() % 5, 4, 'Y') //singleMinutes
         );
     }
@@ -43,5 +43,15 @@ public class BerlinClockService {
         return time.getSecond() % 2 == 0 ? "Y" : "O";
     }
 
-
+    private String fiveMinutes(int minute) {
+        StringBuilder row = new StringBuilder(11);
+        for (int i = 1; i <= 11; i++) {
+            if (i <= minute / 5) {
+                row.append(i % 3 == 0 ? 'R' : 'Y');
+            } else {
+                row.append('O');
+            }
+        }
+        return row.toString();
+    }
 }
